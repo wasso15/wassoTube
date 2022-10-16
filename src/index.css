@@ -13,6 +13,7 @@
     @apply px-8;
    }
    .LogoTitle{
-      font-family :'Oswald'
+      font-family :'Oswald';
+      font-size:16px
    }
 }

@@ -5,8 +5,7 @@ function Card({dataItem}) {
   const Navigation = useNavigate()
 
 
-
-  const thumbnailYoutube= dataItem.snippet.thumbnails.high.url
+  let  thumbnailYoutube= dataItem.snippet.thumbnails.high.url
   const titleYoutube= dataItem.snippet.title
   const channelTitleYoutube= dataItem.snippet.channelTitle
   return (

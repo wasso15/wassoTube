@@ -3,7 +3,7 @@ import { MdSearch, MdArrowDropDown} from "react-icons/md";
 
 function SearchBar() {
   return (
-    <div className=' pt-40  fixed w-full '>
+    <div className='pt-32 z-20    fixed w-full bg-[white] border-[#F59E0B]'>
         <form className="flex  flex-col justify-center items-center">   
 
                 <div className="relative w-[85%] md:w-1/2">
@@ -14,7 +14,7 @@ function SearchBar() {
                     
                 </div>
                 <hr />
-                <div className='border-b  w-2/3 pt-5'></div>
+                <div className='border-b-2 w-[85%] pt-10 shadow-sm'></div>
                 
         </form>
     
