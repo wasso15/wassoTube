@@ -31,12 +31,13 @@ export const signInWithGoogle= ()=>{
             const mailVerified = result.user.emailVerified;
             const imgUrl= result.user.photoURL; 
             const userName= result.user.displayName; 
-            
+            const userToken= result.user.accessToken
 
             // Stockage des informations 
             localStorage.setItem('mailVerified', mailVerified); 
             localStorage.setItem('imgUrl', imgUrl); 
             localStorage.setItem('userName', userName);
+            localStorage.setItem('userToken', userToken);
             
         }).catch(error=>console.log(error))
 }
