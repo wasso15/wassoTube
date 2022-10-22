@@ -21,8 +21,9 @@ function SearchBar({searchVideos}) {
                      onChange={e=> handleChange(e)}
                      id="voice-search" className="bg-[#F59E0B]/[.35]  text-gray-900 text-sm block  rounded-lg w-full pl-10 p-2.5 placeholder-black focus:outline-none z-50" placeholder="Search ..." required/>
                     
-                    <button type="submit" className="flex absolute inset-y-0 right-0 w-10 items-center rounded-lg hover:bg-[#F59E0B]/[.40] ">
-                        <MdSearch className='text-[30px] text-[#1F2937]'/>
+                    <button type="submit" className=" absolute inset-y-0 right-0 w-14 items-center rounded-lg bg-[#F59E0B]/[.60] hover:bg-[#F59E0B]/[.80] ">
+
+                        <MdSearch className='text-[30px] text-[#1F2937] m-auto'/>
                     </button>
                     
                 </div>

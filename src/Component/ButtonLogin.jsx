@@ -1,5 +1,5 @@
 import React from 'react'; 
-import {signInWithGoogle} from "../App"; 
+import {signInWithGoogle} from "../Service/firebase"; 
 import {FaGoogle} from 'react-icons/fa'; 
 
 
