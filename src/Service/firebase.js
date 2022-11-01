@@ -1,5 +1,6 @@
-import firebase from 'firebase/compat/app'
-import "firebase/compat/auth"
+
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup,signOut } from  'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyD1urvE483bNDXro5TsLXgTR27I8ivHAk4",
@@ -10,17 +11,34 @@ const firebaseConfig = {
   appId: "1:872311423051:web:b1b8dbf81ba71548384dce"
 };
 
-firebase.initializeApp(firebaseConfig)
 
-export const auth= firebase.auth()
-export const provider = new firebase.auth.GoogleAuthProvider();
+const app = initializeApp(firebaseConfig);
 
-provider.addScope('https://www.googleapis.com/auth/youtube.force-ssl')
-export const signInWithGoogle= async ()=>{
-  const response = await auth.signInWithPopup(provider);
-  localStorage.setItem('image',response.additionalUserInfo.profile.picture)
-  localStorage.setItem('token', response.credential.accessToken)
-  localStorage.setItem('profilName',   response.additionalUserInfo.profile.displayName)
+export const auth = getAuth(app)
+export const provider = new GoogleAuthProvider();
 
+// AddScope 
+provider.addScope('https://www.googleapis.com/auth/youtube')
+export const signInWithGoogle = () => {
+  signInWithPopup(auth, provider).then((result)=>{
+      
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+      const name = result.user.displayName;
+      const email = result.user.email;
+      const profilePic = result.user.photoURL;
+      const token = credential.accessToken;
+      localStorage.setItem("profilName", name)
+      localStorage.setItem("token", token) // Ajout token 
+      localStorage.setItem("image", profilePic)
+  }).catch(error => console.log(error))
 }
-export default firebase.auth();
+
+export const SignOut = ()=>{
+  signOut(auth).then(() => {
+  console.log('Sign Out reussi')
+}).catch((error) => {
+  // An error happened.
+});
+}
+
+

@@ -5,11 +5,11 @@ function SearchBar({searchVideos}) {
   const [termSearch, setTermSearch]= useState(''); 
   let termChange; 
   const handleChange = (event)=>{
-   console.log(termChange= event.target.value)
+   termChange= event.target.value
   }
 
   return (
-    <div className='pt-32 z-20    fixed w-full bg-[white] border-[#F59E0B]'>
+    <div className=' pt-36 z-20 fixed w-full bg-[white] border-[#F59E0B]  '>
         <form className="flex  flex-col justify-center items-center" 
         onSubmit=
         {(e)=>{

@@ -14,5 +14,6 @@ module.exports = {
   plugins: [
     require('tailwindcss-filters'), 
     require('tailwind-scrollbar'),
+    require('@tailwindcss/line-clamp'),
   ],
 }

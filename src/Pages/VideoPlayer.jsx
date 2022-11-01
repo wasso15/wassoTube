@@ -18,7 +18,7 @@ function VideoPlayer() {
   return (
     <div className='pt-24  m-auto w-[45%] flex  flex-col '>
     <YouTube videoId={id} opts={opts}/>
-    <FoooterPlayList/>
+     <FoooterPlayList/> 
     </div>
   )
 }
