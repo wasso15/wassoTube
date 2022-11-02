@@ -38,6 +38,7 @@ onAuthStateChanged(auth, (user) => {
             {/* <Route path="/" element={ !isAuthentified ? <Login/> : <Navigate replace to={"/home"}/>}/> */}
             <Route path="/" element={<Home/>} />
             <Route path="playvideo/:id" element={<VideoPlayer/>} />
+            <Route path="channelVideo/:id" element={<VideoPlayer/>} />
           </Routes>
      </channelContext.Provider>
      </div>

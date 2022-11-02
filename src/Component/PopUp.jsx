@@ -9,7 +9,8 @@ import {useContext} from 'react';
 
 
 function PopUp({open, setOpen,fetch}) {
-    const {isAuthentified}= useContext(channelContext)
+    const {isAuthentified,fetchUserData}= useContext(channelContext)
+
 console.log(isAuthentified)
   return (
     open && 

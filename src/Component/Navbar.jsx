@@ -197,13 +197,13 @@ console.log(datas)
                   <span className='ml-1 text-xl text-center text-white '> Bibliotheque </span>
                 </li>
 
-                 <div className=' w-[30] px-4 ml-2'>
-              <img src={imgUrl} alt=""  className=" rounded-full w-22 h-22 mt-5 object-cover"/>
+              <div className=' w-[30] px-4 ml-2'>
+                  <img src={imgUrl} alt=""  className=" rounded-full w-22 h-22 mt-5 object-cover"/>
             </div>
                 <li className='flex items-center justify-center h-[60px]  hover:border-[#F59E0B]  w-full cursor-pointer ' > 
               
                    <MdLogout className='text-xl text-[#F59E0B]'/>
-                    <span className='ml-1 text-xl text-center text-white ' onClick={logOutFirebase}> Se deconnecter </span>
+                    <span className='ml-1 text-xl text-center text-white ' onClick={isAuthentified ?  logOutFirebase: signInWithGoogle}> { isAuthentified ? 'Se deconnecter' : 'Se connecter'  }  </span>
                 </li>
           </ul>
         </div>

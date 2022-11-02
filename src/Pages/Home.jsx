@@ -27,15 +27,6 @@ const searchVideos= (term)=>{
    ;}
 }
 
-const fetchdata= ()=>
-{
-  console.log('hello')
-
-}
-
-// setFetchUserData(fetchdata)
-
-
 window.addEventListener('click',(e)=>{
   setOpenModal(false)
 })
@@ -51,10 +42,11 @@ window.addEventListener('click',(e)=>{
         {
     
         setYoutubeChannel(data)
-        
       })
-    } 
-    
+      setOpenModal(false)
+
+    }
+
 Promise.all( [
    fetch("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=fr&key=AIzaSyAKkmVi95-loHneugrtDolHPduXe_IZoto",
    )   
@@ -78,6 +70,30 @@ setToWatch(false)
  console.log(isAuthentified)
    
   },[])
+
+
+
+  useEffect(()=>{
+
+    if(isAuthentified){
+      fetch('https://youtube.googleapis.com/youtube/v3/subscriptions?part=id%2Csnippet%2CcontentDetails&maxResults=21&mine=true&key=AIzaSyD1urvE483bNDXro5TsLXgTR27I8ivHAk4&access_token='+userToken)
+      .then(response =>{
+          return response.json()
+      })
+      .then(data =>
+        {
+    
+        setYoutubeChannel(data)
+      })
+
+
+    }
+    else{
+      setYoutubeChannel('')
+
+
+    } 
+  },[isAuthentified])
  
   return (  
     <div>

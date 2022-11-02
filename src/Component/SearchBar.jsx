@@ -9,7 +9,7 @@ function SearchBar({searchVideos}) {
   }
 
   return (
-    <div className=' pt-36 z-20 fixed w-full bg-[white] border-[#F59E0B]  '>
+    <div className=' pt-24 first-letter:md:pt-36 z-20 fixed w-full bg-[white] border-[#F59E0B]  '>
         <form className="flex  flex-col justify-center items-center" 
         onSubmit=
         {(e)=>{
