@@ -22,7 +22,7 @@ console.log(isAuthentified)
 
 const datas = youtubeChannel.items; 
 
-console.log(datas)
+// console.log(datas)
 
   const menuref= useRef(); 
   const linkRef= useRef(); 
@@ -30,7 +30,7 @@ console.log(datas)
   const iconLeft = useRef(); 
   const iconRight = useRef(); 
   const imgProfil = useRef(); 
-
+  const surfing=useNavigate()
 
 
   const imgUrl= localStorage.getItem('image'); 
@@ -41,6 +41,7 @@ console.log(datas)
     .then(response=> response.json())
     .then(datas=> setVideoChannel(datas.items))
     SetOpenChannelList(false)  
+    surfing('channelVideo')
   }
 
   window.addEventListener('click', (e)=>{
@@ -109,7 +110,9 @@ console.log(datas)
               
             </li>
 
-            <li className='flex items-center h-[60px] hover:border-[#F59E0B] border-b-4 border-[#1F2937] cursor-pointer p-3 lg:p-6' > 
+            <li 
+               onClick={()=>surfing('/Bibliotheque')}
+               className='flex items-center h-[60px] hover:border-[#F59E0B] border-b-4 border-[#1F2937] cursor-pointer p-3 lg:p-6' > 
               <MdVideoLibrary className='text-[20px]'/>
               <span className='ml-2 text-[14px]'> Bibliotheque </span>
                
@@ -185,14 +188,21 @@ console.log(datas)
                  
                 </li>
 
-                <li className='flex items-center justify-center   h-[60px]  hover:border-[#F59E0B] border-b   border-[#F59E0B] w-full cursor-pointer p-3 lg:p-6 ' ref={linkRef}>
-                    
-                  
-                    <span className='ml-1 text-xl text-center text-white ' ref={textLink}> Abonnement </span>
+                <li 
+                  onClick={(e)=>{
+                    setOpenDropMenu(false)
+                    SetOpenChannelList(true)
+                    e.stopPropagation(e)
+                  }}
+                  className='flex items-center justify-center   h-[60px]  hover:border-[#F59E0B] border-b   border-[#F59E0B] w-full cursor-pointer p-3 lg:p-6 ' ref={linkRef}>
+                  <span className='ml-1 text-xl text-center text-white ' ref={textLink}> Abonnement </span>
                     
                   </li>
 
-                <li className='flex items-center justify-center   h-[90px]  hover:border-[#F59E0B] border-b  border-[#F59E0B] w-full cursor-pointer p-3 lg:p-6 ' > 
+                <li  onClick={()=>
+                {surfing('/Bibliotheque');
+                  setOpenDropMenu(false)}}
+                className='flex items-center justify-center   h-[90px]  hover:border-[#F59E0B] border-b  border-[#F59E0B] w-full cursor-pointer p-3 lg:p-6 ' > 
                   
                   <span className='ml-1 text-xl text-center text-white '> Bibliotheque </span>
                 </li>
@@ -203,7 +213,7 @@ console.log(datas)
                 <li className='flex items-center justify-center h-[60px]  hover:border-[#F59E0B]  w-full cursor-pointer ' > 
               
                    <MdLogout className='text-xl text-[#F59E0B]'/>
-                    <span className='ml-1 text-xl text-center text-white ' onClick={isAuthentified ?  logOutFirebase: signInWithGoogle}> { isAuthentified ? 'Se deconnecter' : 'Se connecter'  }  </span>
+                    <span className='ml-1 text-xl text-center text-white ' onClick={isAuthentified ?  logOutFirebase: signInWithGoogle}>{ isAuthentified ? 'Se deconnecter' : 'Se connecter'  }  </span>
                 </li>
           </ul>
         </div>
@@ -217,8 +227,8 @@ console.log(datas)
   
 
     openChannelList &&  
-          <div className=' hidden md:block fixed top border w-[99%] mx-auto mt-[50px] h-[230px] rounded-b-xl bg-white z-30  shadow-md backdrop-blur-sm bg-opacity-60 backdrop-filter-blur'
-          //  onClick={()=>{setOpen(false)}}
+          <div className='fixed top border w-[99%] mx-auto mt-[50px] h-[230px] rounded-b-xl bg-white z-30  shadow-md backdrop-blur-sm bg-opacity-60 backdrop-filter-blur'
+          //  
           ref={menuref}
            onClick={(e)=>{e.stopPropagation()}}>
 

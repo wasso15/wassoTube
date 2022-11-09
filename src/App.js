@@ -8,6 +8,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {channelContext} from "./Service/wassoTubeContext"
 import { useEffect, useState } from "react";
 import VideoPlayer from "./Pages/VideoPlayer";
+import Bibliotheque from "./Pages/Bibliotheque";
+import ChannelVideo from "./Pages/ChannelVideo";
 
 
 function App() 
@@ -15,7 +17,11 @@ function App()
   const [isAuthentified, setIsAuthentified]= useState(false); 
   const [youtubeChannel, setYoutubeChannel] = useState('Bonjour'); 
   const [videoChannel, setVideoChannel]= useState(false);  
-  const [fetchUserData, setFetchUserData] = useState()
+  const [fetchUserData, setFetchUserData] = useState(); 
+  const [likeVideo, setLikeVideo]= useState()
+  const [loader, setLoader]= useState(true); 
+  const [dataVideo, setDataVideo] = useState()
+
 
   useEffect(() => {
     const auth = getAuth();
@@ -31,7 +37,9 @@ onAuthStateChanged(auth, (user) => {
   return (
     <div className="App">
      
-      <channelContext.Provider value={{youtubeChannel, setYoutubeChannel, videoChannel,setVideoChannel,isAuthentified,setIsAuthentified,fetchUserData, setFetchUserData}}>
+      <channelContext.Provider 
+      value={
+        {youtubeChannel, setYoutubeChannel, videoChannel,setVideoChannel,isAuthentified,setIsAuthentified,fetchUserData, setFetchUserData,loader,likeVideo, setLikeVideo, setLoader, dataVideo, setDataVideo}}>
       
          <Navbar  isAuthentified={setIsAuthentified}/>
           <Routes>
@@ -39,6 +47,9 @@ onAuthStateChanged(auth, (user) => {
             <Route path="/" element={<Home/>} />
             <Route path="playvideo/:id" element={<VideoPlayer/>} />
             <Route path="channelVideo/:id" element={<VideoPlayer/>} />
+            <Route path="Bibliotheque" element={<Bibliotheque/>} />
+            <Route path="channelVideo" element={<ChannelVideo/>} />
+
           </Routes>
      </channelContext.Provider>
      </div>

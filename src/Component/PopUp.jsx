@@ -30,7 +30,7 @@ console.log(isAuthentified)
                     <p className='text-center w-[90%] font-normal text-sm'> Utilisez toutes nos fonctionnalités après vous être connecté avec votre compte Gmail </p>
                 </div>
                 
-                <div className=' flex flex-col md:flex-row mb- md:mb-0  justify-around gap-2  w-[90%] '>
+                <div className=' flex flex-col md:flex-row mb-2 md:mb-0  justify-around gap-2  w-[90%] '>
                     <button className='border-2 py-2 w-full border-[#1F2937]  hover:bg-[#1F2937]/5'onClick={()=> setOpen(false)}> No, Merci </button>
                     <button onClick={signInWithGoogle}
                         className='py-2 w-full bg-[#1F2937] hover:bg-[#1F2937]/90 flex items-center gap-2 justify-center text-white '> <AiOutlineGoogle/> Sign in </button>

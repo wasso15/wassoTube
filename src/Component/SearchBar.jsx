@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { MdSearch, MdArrowDropDown} from "react-icons/md";
+import {channelContext} from "../Service/wassoTubeContext"
+
+
 
 function SearchBar({searchVideos}) {
   const [termSearch, setTermSearch]= useState(''); 
   let termChange; 
+  const {loader, setLoader}= useContext(channelContext); 
   const handleChange = (event)=>{
    termChange= event.target.value
   }
@@ -14,6 +18,7 @@ function SearchBar({searchVideos}) {
         onSubmit=
         {(e)=>{
           e.preventDefault()
+          setLoader(true)
           searchVideos(termChange)}}>   
 
                 <div className="relative w-[85%] md:w-1/2">
