@@ -41,7 +41,6 @@ onAuthStateChanged(auth, (user) => {
       value={
         {youtubeChannel, setYoutubeChannel, videoChannel,setVideoChannel,isAuthentified,setIsAuthentified,fetchUserData, setFetchUserData,loader,likeVideo, setLikeVideo, setLoader, dataVideo, setDataVideo}}>
       
-         <Navbar  isAuthentified={setIsAuthentified}/>
           <Routes>
             {/* <Route path="/" element={ !isAuthentified ? <Login/> : <Navigate replace to={"/home"}/>}/> */}
             <Route path="/" element={<Home/>} />

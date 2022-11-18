@@ -64,7 +64,7 @@ function VideoPlayer() {
 
 
           <div className=' text-[13px] text-white mx-auto pt-6 h-[50%] w-[90%] flex items-center line-clamp-5'>
-              <p> {dataVideo.snippet.description }</p>
+              <p > {dataVideo.snippet.description }</p>
           </div>
 
           <div className=' w-full   mx-auto flex justify-center items-center h-[15%] rounded-md bg-white shadow-md backdrop-blur-sm bg-opacity-60 backdrop-filter-blur'>
