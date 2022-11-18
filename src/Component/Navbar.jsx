@@ -63,12 +63,6 @@ const datas = youtubeChannel.items;
 
   
   }
-  const logginNavabar= ()=>
-  {
-    
-
-  }
-
 
   // Slider card functional
 
@@ -90,7 +84,7 @@ const datas = youtubeChannel.items;
     <>
      <nav className='fixed w-screen h-[60px] flex justify-between items-center bg-[#1F2937] text-[#F5F5F5] rounded-b-[15px] shadow-xl md:shadow-lg z-40'> 
      
-      <a href='http://localhost:3000/' className='flex items-center px-5  md:px-10'>
+      <a href='https://wassotube.vercel.app/' className='flex items-center px-5  md:px-10'>
           <div>
               <img src={Logo} alt="Logo Wassotube" className='w-[30px] md:w-[30px] ' />
           </div>
