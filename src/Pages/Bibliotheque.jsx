@@ -29,7 +29,7 @@ function Bibliotheque() {
 
   return (
     <div>
-        <SearchBar/>   
+        {/* <SearchBar/>    */}
         
         
         {loader &&<Loader/> }

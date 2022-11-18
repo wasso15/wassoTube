@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import VideoPlayer from "./Pages/VideoPlayer";
 import Bibliotheque from "./Pages/Bibliotheque";
 import ChannelVideo from "./Pages/ChannelVideo";
+import Header from "./Component/Header";
+import SearchVideo from "./Pages/SearchVideo";
 
 
 function App() 
@@ -41,11 +43,13 @@ onAuthStateChanged(auth, (user) => {
       value={
         {youtubeChannel, setYoutubeChannel, videoChannel,setVideoChannel,isAuthentified,setIsAuthentified,fetchUserData, setFetchUserData,loader,likeVideo, setLikeVideo, setLoader, dataVideo, setDataVideo}}>
       
+         {/* <Navbar  isAuthentified={setIsAuthentified}/> */}
+         <Header/>
           <Routes>
             {/* <Route path="/" element={ !isAuthentified ? <Login/> : <Navigate replace to={"/home"}/>}/> */}
             <Route path="/" element={<Home/>} />
             <Route path="playvideo/:id" element={<VideoPlayer/>} />
-            <Route path="channelVideo/:id" element={<VideoPlayer/>} />
+            <Route path="searchVideo/:term" element={<SearchVideo/>} />
             <Route path="Bibliotheque" element={<Bibliotheque/>} />
             <Route path="channelVideo" element={<ChannelVideo/>} />
 

@@ -15,7 +15,6 @@ function ChannelVideo() {
   return (
     <div>
          {loading&&<Loader/>}
-        <SearchBar  />
         <Cards data ={videoChannel}/> 
     </div>
   )

@@ -19,26 +19,13 @@ function Home() {
 
 
 const userToken =  localStorage.getItem('token'); 
-const searchVideos= (term)=>{
-  setLoader(true) 
-  if(term){ 
-   
-  fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${term}&key=AIzaSyAKkmVi95-loHneugrtDolHPduXe_IZoto`)
-  .then(response => response.json())
-  .then((data)=>{setSearchVideoResult(data.items)} ); 
-  setToWatch(true); 
-  setVideoChannel(false); 
- 
-   ;}
-   setLoader(false)
-}
+
 
 window.addEventListener('click',(e)=>{
   setOpenModal(false)
 })
 
   useEffect(()=>{
-    console.log(isAuthentified)
     if(isAuthentified){
 
 
@@ -120,9 +107,8 @@ setToWatch(false)
                 
           
                 { !isAuthentified && <PopUp open={openModal} setOpen={setOpenModal} /> }
-        <SearchBar searchVideos={searchVideos}/>      
        {loader &&<Loader/> }
-        <Cards data ={toWatch ? searchVideoResult : youtubeData}/> 
+        <Cards data ={ youtubeData}/> 
         
     </div>
   )

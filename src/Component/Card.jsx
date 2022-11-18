@@ -1,20 +1,27 @@
 import React, {useContext} from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, useLocation } from 'react-router-dom'; 
 import { channelContext } from '../Service/wassoTubeContext';
 
 
 
 function Card({dataItem}) {
     const { setDataVideo}= useContext(channelContext)
-  const Navigation = useNavigate()
+  const Navigation = useNavigate(); 
+  const Localize= useLocation().pathname
   
   let  thumbnailYoutube= dataItem.snippet.thumbnails.high.url
   const titleYoutube= dataItem.snippet.title
   const channelTitleYoutube= dataItem.snippet.channelTitle; 
+  let id  = dataItem.id;
+  // 
+      // if(Localize==='/channelVideo'){
+      //     id= id.videoId
+      // }
+      console.log(dataItem)
   const watchVideo= ()=>{
     
     setDataVideo(dataItem)
-    Navigation(`/playvideo/${dataItem.id}`); 
+    Navigation(`/playvideo/${id}`); 
   }
   return (
     <div onClick={watchVideo} className="p-5 transform transition duration-200 hover:scale-110 hover:rotate-2  ">  

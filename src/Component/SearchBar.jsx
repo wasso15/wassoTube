@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { MdSearch, MdArrowDropDown} from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 import {channelContext} from "../Service/wassoTubeContext"
 
 
@@ -8,6 +9,13 @@ function SearchBar({searchVideos}) {
   const [termSearch, setTermSearch]= useState(''); 
   let termChange; 
   const {loader, setLoader}= useContext(channelContext); 
+  const surf=useNavigate(); 
+  let isSubmit
+
+  const onSubmitSearch= (ev)=>{
+    ev.preventDefault(); 
+    surf(`/searchVideo/${termChange}`); 
+  }
   const handleChange = (event)=>{
    termChange= event.target.value
   }
@@ -16,10 +24,7 @@ function SearchBar({searchVideos}) {
     <div className=' pt-24 first-letter:md:pt-36 z-20 fixed w-full bg-[white] border-[#F59E0B]  '>
         <form className="flex  flex-col justify-center items-center" 
         onSubmit=
-        {(e)=>{
-          e.preventDefault()
-          setLoader(true)
-          searchVideos(termChange)}}>   
+        {(e)=>{onSubmitSearch(e)}}>   
 
                 <div className="relative w-[85%] md:w-1/2">
                      <input type="text" 
