@@ -1,9 +1,6 @@
 
 import Home from "./Pages/Home";
-import Login from "./Pages/Login";
 import { Routes, Route, Navigate } from "react-router-dom"; 
-import Navbar from "./Component/Navbar";
-// import firebase from 'firebase/compat/app';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {channelContext} from "./Service/wassoTubeContext"
 import { useEffect, useState } from "react";
@@ -12,26 +9,51 @@ import Bibliotheque from "./Pages/Bibliotheque";
 import ChannelVideo from "./Pages/ChannelVideo";
 import Header from "./Component/Header";
 import SearchVideo from "./Pages/SearchVideo";
+import io from 'socket.io-client';
+
+
+const socket = io.connect('http://localhost:5000')
 
 
 function App() 
 {
-  const [isAuthentified, setIsAuthentified]= useState(false); 
+  const [isAuthentified, setIsAuthentified]= useState({}); 
   const [youtubeChannel, setYoutubeChannel] = useState('Bonjour'); 
   const [videoChannel, setVideoChannel]= useState(false);  
   const [fetchUserData, setFetchUserData] = useState(); 
   const [likeVideo, setLikeVideo]= useState()
   const [loader, setLoader]= useState(true); 
-  const [dataVideo, setDataVideo] = useState()
+  const [dataVideo, setDataVideo] = useState(); 
+  const [showInputSub, setShowInputSub]= useState(false)
 
 
   useEffect(() => {
-    const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    setIsAuthentified(true); 
-   
-  }}) 
+
+  
+      fetch("http://localhost:5000/wassotubeUser", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200){
+            setIsAuthentified(false); 
+            return response.json();
+          } 
+          throw new Error("authentication has been failed!");
+        })
+        .then((resObject) => {
+          console.log(resObject)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+
+
      
 }, [])
 
@@ -41,7 +63,9 @@ onAuthStateChanged(auth, (user) => {
      
       <channelContext.Provider 
       value={
-        {youtubeChannel, setYoutubeChannel, videoChannel,setVideoChannel,isAuthentified,setIsAuthentified,fetchUserData, setFetchUserData,loader,likeVideo, setLikeVideo, setLoader, dataVideo, setDataVideo}}>
+        {socket,youtubeChannel, setYoutubeChannel, videoChannel,setVideoChannel,
+        isAuthentified,setIsAuthentified,fetchUserData, setFetchUserData,loader,likeVideo,
+         setLikeVideo, setLoader, dataVideo, setDataVideo, showInputSub, setShowInputSub}}>
       
          {/* <Navbar  isAuthentified={setIsAuthentified}/> */}
          <Header/>

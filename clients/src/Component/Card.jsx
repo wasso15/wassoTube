@@ -17,7 +17,6 @@ function Card({dataItem}) {
       // if(Localize==='/channelVideo'){
       //     id= id.videoId
       // }
-      console.log(dataItem)
   const watchVideo= ()=>{
     
     setDataVideo(dataItem)

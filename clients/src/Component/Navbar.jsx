@@ -2,8 +2,8 @@ import React, {useState,useRef, useContext} from 'react';
 import Logo from '../Assets/Logo.png'; 
 import sorry from '../Assets/pngwing.com.png'
 import { AiOutlineGoogle } from "react-icons/ai"
-import {SignOut} from '../Service/firebase'
-import {signInWithGoogle} from "../Service/firebase"; 
+import {SignOut} from '../Service/Auth'
+import {signInWithGoogle} from "../Service/Auth"; 
 import { MdVideoLibrary, MdPlaylistPlay, MdMenu, MdChevronLeft, MdChevronRight,MdLogout, MdClose } from "react-icons/md";
 import {channelContext} from '../Service/wassoTubeContext'; 
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,7 @@ const [openChannelList, SetOpenChannelList]= useState(false)
 
 const {youtubeChannel,setVideoChannel,isAuthentified, setIsAuthentified} = useContext(channelContext); 
 
-console.log(isAuthentified)
+// console.log(isAuthentified)
 
 const datas = youtubeChannel.items; 
 
@@ -46,23 +46,23 @@ const datas = youtubeChannel.items;
 
   window.addEventListener('click', (e)=>{
     SetOpenChannelList(false)
-     console.log(e.target)
   
   })
   
-  // LogOut Fonction 
-
-  const logOutFirebase =()=>{
-
-   SignOut()
   
-   setIsAuthentified(false)
-   setOpenLogOut(false)
-   // Suppression du local storage 
-    localStorage.clear()
+  // // LogOut Fonction 
+
+  // const logOutFirebase =()=>{
+
+  //  SignOut()
+  
+  //  setIsAuthentified(false)
+  //  setOpenLogOut(false)
+  //  // Suppression du local storage 
+  //   localStorage.clear()
 
   
-  }
+  // }
 
   // Slider card functional
 
@@ -82,7 +82,7 @@ const datas = youtubeChannel.items;
      
     return (
     <>
-     <nav className='fixed w-screen h-[60px] flex justify-between items-center bg-[#1F2937] text-[#F5F5F5] rounded-b-[15px] shadow-xl md:shadow-lg z-40'> 
+     <nav className='fixed w-screen h-[50px] flex justify-between items-center bg-[#1F2937] text-[#F5F5F5] rounded-b-[15px] shadow-xl md:shadow-lg z-40'> 
      
       <a href='https://wassotube.vercel.app/' className='flex items-center px-5  md:px-10'>
           <div>
@@ -161,7 +161,10 @@ const datas = youtubeChannel.items;
                     <li className='flex items-center justify-center  hover:border-[#F59E0B]   cursor-pointer py-6' > 
                   
                       <MdLogout className='text-xl text-[#F59E0B]'/>
-                      <span className='ml-1 text-sm text-center text-[#1F2937]' onClick={logOutFirebase}> Se deconnecter </span>
+                      <span className='ml-1 text-sm text-center text-[#1F2937]' 
+                      // onClick={logOutFirebase}
+                      > 
+                      Se deconnecter </span>
                    
                     </li>
               </ul>
@@ -207,7 +210,9 @@ const datas = youtubeChannel.items;
                 <li className='flex items-center justify-center h-[60px]  hover:border-[#F59E0B]  w-full cursor-pointer ' > 
               
                    <MdLogout className='text-xl text-[#F59E0B]'/>
-                    <span className='ml-1 text-xl text-center text-white ' onClick={isAuthentified ?  logOutFirebase: signInWithGoogle}>{ isAuthentified ? 'Se deconnecter' : 'Se connecter'  }  </span>
+                    <span className='ml-1 text-xl text-center text-white ' 
+                    // onClick={isAuthentified ?  logOutFirebase: signInWithGoogle}
+                    >{ isAuthentified ? 'Se deconnecter' : 'Se connecter'  }  </span>
                 </li>
           </ul>
         </div>

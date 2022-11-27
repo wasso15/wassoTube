@@ -26,19 +26,21 @@ window.addEventListener('click',(e)=>{
 })
 
   useEffect(()=>{
+       
+
     if(isAuthentified){
 
 
-      fetch('https://youtube.googleapis.com/youtube/v3/subscriptions?part=id%2Csnippet%2CcontentDetails&maxResults=21&mine=true&key=AIzaSyD1urvE483bNDXro5TsLXgTR27I8ivHAk4&access_token='+userToken)
-      .then(response =>{
-          return response.json()
-      })
-      .then(data =>
-        {
-          console.log(data)
+      // fetch('https://youtube.googleapis.com/youtube/v3/subscriptions?part=id%2Csnippet%2CcontentDetails&maxResults=21&mine=true&key=AIzaSyD1urvE483bNDXro5TsLXgTR27I8ivHAk4&access_token='+userToken)
+      // .then(response =>{
+      //     return response.json()
+      // })
+      // .then(data =>
+      //   {
+      //     console.log(data)
     
-        setYoutubeChannel(data)
-      });  
+      //   setYoutubeChannel(data)
+      // });  
   
     }
 
@@ -68,45 +70,45 @@ setToWatch(false)
 
 
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    if(isAuthentified)
-    {
-      fetch('https://youtube.googleapis.com/youtube/v3/subscriptions?part=id%2Csnippet%2CcontentDetails&maxResults=21&mine=true&key=AIzaSyD1urvE483bNDXro5TsLXgTR27I8ivHAk4&access_token='+userToken)
-      .then(response =>{    
-          return response.json()
-      })
-      .then(data =>
-        {
+  //   if(isAuthentified)
+  //   {
+  //     fetch('https://youtube.googleapis.com/youtube/v3/subscriptions?part=id%2Csnippet%2CcontentDetails&maxResults=21&mine=true&key=AIzaSyD1urvE483bNDXro5TsLXgTR27I8ivHAk4&access_token='+userToken)
+  //     .then(response =>{    
+  //         return response.json()
+  //     })
+  //     .then(data =>
+  //       {
     
-        setYoutubeChannel(data)
-      })
+  //       setYoutubeChannel(data)
+  //     })
           
 
-      fetch('https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&myRating=like&key=AIzaSyD1urvE483bNDXro5TsLXgTR27I8ivHAk4&access_token='+userToken)
-      .then(likedVideo =>{
-          return likedVideo.json()
-      })
-      .then(datas =>
-        {
-          setLikeVideo(datas)
-      })
+  //     fetch('https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&myRating=like&key=AIzaSyD1urvE483bNDXro5TsLXgTR27I8ivHAk4&access_token='+userToken)
+  //     .then(likedVideo =>{
+  //         return likedVideo.json()
+  //     })
+  //     .then(datas =>
+  //       {
+  //         setLikeVideo(datas)
+  //     })
   
 
 
-    }
-    else{
-      setYoutubeChannel('')
+  //   }
+  //   else{
+  //     setYoutubeChannel('')
 
 
-    } 
-  },[isAuthentified])
+  //   } 
+  // },[isAuthentified])
  
   return (  
     <div>
                 
           
-                { !isAuthentified && <PopUp open={openModal} setOpen={setOpenModal} /> }
+      { !isAuthentified && <PopUp open={openModal} setOpen={setOpenModal} /> }
        {loader &&<Loader/> }
         <Cards data ={ youtubeData}/> 
         

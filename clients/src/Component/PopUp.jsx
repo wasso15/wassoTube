@@ -3,7 +3,7 @@ import {MdClose} from 'react-icons/md';
 import popUpImg from '../Assets/popup.jpg'
 import decPopUpImg from '../Assets/pretty-blond-wavy-haired-teenage-girl-waving-goodbye-to-friend-looking-sad-isolated-on-blue-background-bye-bye-expression.jpg'
 import { AiOutlineGoogle } from "react-icons/ai"
-import {signInWithGoogle} from "../Service/firebase"; 
+import {signInWithGoogle} from "../Service/Auth"; 
 import {channelContext} from '../Service/wassoTubeContext'; 
 import {useContext} from 'react';
 
