@@ -3,12 +3,12 @@ import { useState, useContext} from 'react';
 import {MdSend} from 'react-icons/md'; 
 import {channelContext} from'../Service/wassoTubeContext'
 
-function InputComment() {
+function InputComment({idVideo}) {
   const {socket}= useContext(channelContext); 
   const [termComment, setTermComment] = useState('')
   const onSubmitComment= (e)=>{
     e.preventDefault();  
-    socket.emit ('commentUser', {termComment})
+    socket.emit ('commentUser', {termComment, idVideo})
   }
   return (
     <div className='flex  items-center justify-center h-[100%]'>

@@ -6,11 +6,13 @@ import SearchBar from './SearchBar'
 
 function Header() {
     const location =useLocation(); 
-    let isVideoPlayer= !location.pathname.includes('/playvideo/'); 
+    // let isVideoPlayer= !location.pathname.includes('/playvideo/'); 
   return (
     <div>
         <Navbar/>
-        {isVideoPlayer &&<SearchBar/>}
+        {/* {isVideoPlayer && */}
+        <SearchBar/>
+        {/* } */}
     </div>
   )
 }

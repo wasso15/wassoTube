@@ -21,7 +21,7 @@ function SearchBar({searchVideos}) {
   }
 
   return (
-    <div className=' pt-24 first-letter:md:pt-36 z-20 fixed w-full bg-[white] border-[#F59E0B]  '>
+    <div className=' pt-20 first-letter:md:pt-36 z-20 fixed w-full bg-[white] border-[#F59E0B]  '>
         <form className="flex  flex-col justify-center items-center" 
         onSubmit=
         {(e)=>{onSubmitSearch(e)}}>   
@@ -29,11 +29,11 @@ function SearchBar({searchVideos}) {
                 <div className="relative w-[85%] md:w-1/2">
                      <input type="text" 
                      onChange={e=> handleChange(e)}
-                     id="voice-search" className="bg-[#F59E0B]/[.35]  text-gray-900 text-sm block  rounded-lg w-full pl-10 p-2.5 placeholder-black focus:outline-none z-50" placeholder="Search ..." required/>
+                     id="voice-search" className="bg-[#F59E0B]/[.35]  text-gray-900 text-[13px] block  rounded-lg w-full pl-10 p-2 placeholder-black focus:outline-none z-50" placeholder="Search ..." required/>
                     
                     <button type="submit" className=" absolute inset-y-0 right-0 w-14 items-center rounded-lg bg-[#F59E0B]/[.60] hover:bg-[#F59E0B]/[.80] ">
 
-                        <MdSearch className='text-[30px] text-[#1F2937] m-auto'/>
+                        <MdSearch className='text-[22px] text-[#1F2937] m-auto'/>
                     </button>
                     
                 </div>

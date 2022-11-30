@@ -19,7 +19,7 @@ function SubComment({item}) {
 
                             
                     <div className='w-[70%] text-xs px-5 pt-2 pb-2  text-gray-900 bg-white shadow-md backdrop-blur-sm bg-opacity-60 backdrop-filter-blur rounded-lg h-auto' >
-                        {item.subComment} 
+                        {/* {item.subComment}  */}
                     </div>
 
                     </div>

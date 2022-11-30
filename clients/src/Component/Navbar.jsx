@@ -88,7 +88,7 @@ const datas = youtubeChannel.items;
           <div>
               <img src={Logo} alt="Logo Wassotube" className='w-[30px] md:w-[30px] ' />
           </div>
-          <div className=' text-tracking-tight text-lg LogoTitle'> WassoTube</div>
+          <div className=' text-tracking-tight LogoTitle'> WassoTube</div>
       </a>
        
       {/* Menu items  */}
@@ -96,19 +96,18 @@ const datas = youtubeChannel.items;
 
           <ul className='flex items-center'>
             
-            <li className='flex items-center  h-[60px] hover:border-[#F59E0B] border-b-4 border-[#1F2937] cursor-pointer p-3 lg:p-6 ' 
-            onClick={(e) => 
+            <li className='flex items-center  h-[30px] hover:border-[#F59E0B] border-b-4 border-[#1F2937] cursor-pointer p-3 lg:p-[23px] ' 
+              onClick={(e) => 
               {SetOpenChannelList(!openChannelList); e.stopPropagation()}}>
-              <MdPlaylistPlay className='text-[25px]'/>  
-              <span className='ml-1 text-[14px] ' ref={textLink}> Abonnement </span>
-              
+              <MdPlaylistPlay className='text-[20px]'/>  
+              <span className='ml-1 text-[13px] ' ref={textLink}> Abonnement </span>
             </li>
 
             <li 
                onClick={()=>surfing('/Bibliotheque')}
-               className='flex items-center h-[60px] hover:border-[#F59E0B] border-b-4 border-[#1F2937] cursor-pointer p-3 lg:p-6' > 
+               className='flex items-center h-[30px] hover:border-[#F59E0B] border-b-4 border-[#1F2937] cursor-pointer p-3 lg:p-[23px]' > 
               <MdVideoLibrary className='text-[20px]'/>
-              <span className='ml-2 text-[14px]'> Bibliotheque </span>
+              <span className='ml-2 text-[13px]'> Bibliotheque </span>
                
             </li>
           </ul>
@@ -125,11 +124,11 @@ const datas = youtubeChannel.items;
 
               :
 
-            <div className=''>
+            <div className='ml-4'>
               <button onClick={signInWithGoogle}
-                     className='w-[100px] h-10 flex justify-center items-center gap-1 bg-[#F59E0B] rounded-md hover:bg-[#F59E0B]/90 mr-4 lg:mr-0 ' >
-                <AiOutlineGoogle className=' text-[24px] '/>
-                 Sign In 
+                     className='w-[80px] h-[30px] flex justify-center items-center gap-1 bg-[#F59E0B] rounded-md hover:bg-[#F59E0B]/90 mr-4 lg:mr-0 ' >
+                <AiOutlineGoogle className=' text-[18px] '/>
+                 <span className='text-[13px]'> Sign In  </span>
               </button>
             </div>}
           </div>

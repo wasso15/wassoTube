@@ -29,24 +29,26 @@ function App()
 
   useEffect(() => {
 
-  
-      fetch("http://localhost:5000/wassotubeUser", {
+    setIsAuthentified(false)
+
+      fetch("http://localhost:5000/userData", {
         method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
       })
         .then((response) => {
-          if (response.status === 200){
+          if (response.status === 200) {
             setIsAuthentified(false); 
-            return response.json();
-          } 
+            return response.json();}
+          
           throw new Error("authentication has been failed!");
         })
         .then((resObject) => {
-          console.log(resObject)
+       if(resObject.user){
+          
+       }; 
+          // localStorage.setItem("name", name)
+          // localStorage.setItem("email", email)
+          // localStorage.setItem("profilePic", profilePic)
+
         })
         .catch((err) => {
           console.log(err);

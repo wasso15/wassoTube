@@ -18,11 +18,7 @@ function VideoPlayer() {
      let {id} =  useParams();
 
      const url=`https://www.youtube.com/embed/${id}?autoplay=1`; 
-     if(dataVideo)
-     {
-       socket.emit('videoComment', {id,titleVideo,descVideo }); 
-       
-     }
+     
   
     useEffect(()=>{
       console.log(dataVideo.statistics.likeCount)
@@ -36,21 +32,23 @@ function VideoPlayer() {
           setRelatedVideo(datas.items)
         })
         
-       
-
+        if(dataVideo)
+      {
+        socket.emit('searchVideoComment', {id }); 
+      }
       
     }, [])
       
 
   
   return (
-    <div className='pt-24  flex flex-col md:flex-row  items-center justify-center m-auto gap-4  '>
+    <div className='pt-[180px]  flex flex-col md:flex-row items-start justify-center m-auto gap-4  '>
       
-      {/* <div className='aspect-w-16 aspect-h-9 md:aspect-h-2 w-[90%] md:w-[50%] md:h-[400px]'>
+      <div className='aspect-w-16 aspect-h-9 md:aspect-h-2 w-[90%] md:w-[50%] md:h-[400px]'>
             <iframe frameB  order="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" width="640" height="390" src={url}></iframe> 
-      </div> */}
+      </div>
 
-      <Commentary/>
+      <Commentary idVideo={id}/>
 
        {/* <FoooterPlayList datas={relatedVideo}/> */}
   </div>
