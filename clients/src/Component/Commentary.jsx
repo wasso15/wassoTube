@@ -11,6 +11,8 @@ import { useState } from 'react';
 
 
 function Commentary({idVideo}) {
+const userName= localStorage.getItem('profilName'); 
+const urlProfil= localStorage.getItem('image'); 
 
     const [userComment, setuserComment]= useState([]); 
     const [userSubComment, setuserSubComment]= useState([])
@@ -21,21 +23,31 @@ function Commentary({idVideo}) {
       socket.on('sendVideoComments', (data)=>{
         const {searchVideo}= data
         // console.log(searchVideo[0])
-        setuserComment(searchVideo); 
-    })
+
+        // setuserSubComment(comment=>[{subComment: data.termComment}, ...comment]); 
+      })
+      
+      socket.on('sendAllVideoComment', (data)=>{
+        console.log(data.commentData); 
+        setuserComment(comment=>[...comment, data.commentData])
+        console.log(userComment)   
+  })
+        
         socket.on('sendUserComment', (data)=>{
-            setuserComment(comment=>[{commentaire : data.termComment}, ...comment]); 
+           setuserComment(comment=>[{idCommentaire:data.idComment,commentaire : data.termComment, userName, urlProfil}, ...comment]); 
         })
 
+     
         socket.on('sendUserSubComment', (data)=>{
           // console.log(data)
           setuserSubComment(comment=>[{subComment: data.termComment}, ...comment]); 
+          console.log(userComment)
       })
-
+      
 
         
     }, [socket])
-    console.log(userComment)
+    
     let nbreComment = userComment.length
   return (
     <div className=' w-[90%] md:w-[30%] min-h-[500px] rounded-md mb-28 md:mb-0 bg-[#1F2937] '>

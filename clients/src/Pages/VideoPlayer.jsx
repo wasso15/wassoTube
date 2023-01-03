@@ -34,7 +34,7 @@ function VideoPlayer() {
         
         if(dataVideo)
       {
-        socket.emit('searchVideoComment', {id }); 
+        socket.emit('GetAllVideoComment', {id }); 
       }
       
     }, [])

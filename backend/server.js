@@ -1,5 +1,7 @@
 const express= require('express'); 
 const app= express(); 
+const db=require('./config/dbConfig')
+
 
 const http= require('http'); 
 const cors = require('cors'); 
@@ -8,44 +10,17 @@ require('dotenv').config();
 const passport= require('passport')
 require('./config/passportConfig')(passport); 
 const session= require('express-session'); 
+const middleware=require('./config/middlewareFb');
+const admin = require('./config/fireBaseConfig');
+
+let idComment
 
 
 const {getVideoComment, getUserComment, getUserSubComment}= require('./controllers/commentVideo')
-
-
-
 const server= http.createServer(app); 
+
 app.use(cors()); 
-// initialize Sessionn
-const sessionMiddleware= session({
-  secret: "wassotube",
-  resave: false ,
-  saveUninitialized: true ,
-  cookie: { secure: true }
-})
-
-
-
-app.use(sessionMiddleware)
-
-// init passport for every route call
-app.use(passport.initialize()); 
-app.use(passport.session()); 
-
-
-passport.serializeUser( (user, done) => {
-
-  process.nextTick(function() {
-    return done(null, user);
-  });
-})  
-
-
-passport.deserializeUser((user, done) => {
-  process.nextTick(function() {
-    return done(null, user);
-  })
-})
+app.use(middleware.decodeToken)
 
 const io = new Server(server, 
     {
@@ -57,82 +32,101 @@ const io = new Server(server,
     }, 
 })
 
-app.options('*', cors()); 
-app.get('/auth/google',
-  passport.authenticate('google', { scope:
-      [ 'email', 'profile' ] }
-));
-
-app.get( '/auth/google/callback',
-    passport.authenticate( 'google', {
-        session:true,
-        successRedirect: 'http://localhost:3000',
-        failureRedirect: 'http://localhost:3000'
-}));
-
 
  // EndPoint Api 
-  app.get("/wassotubeUser", (req, res) => {
-      res.status(200).json({
-        success: true,
-        message: "successfull",
-        user: "bonsoir",
-      }
+  app.get("/wassotubeUser", (req, res) => {  
+    console.log("EndPoint", req.data); 
+    res.json(req.data)
+  });
+
+
+io.on("connection", (socket) => {
+  // Session user info on socket 
+  console.log(` Id session N° ${socket.id}`);
+
+   // socket.on('videoComment',getVideoComment);
+   socket.on('commentUser', (data)=>
+   {
+      //  getUserComment(data); 
+       const {termComment,idVideo, idClient }= data
+       db.insert(
+        {table: 'commentaire', records: [{ commentaire:termComment, idVideo:idVideo, idYoutube:idClient }]
+        },
+        (err, res) => {
+          if (err){console.log(err)}
+          else{
+             socket.emit('sendUserComment', {termComment,idComment:res.data.inserted_hashes.toString()})
+          }
+        }
       );
+   })
+
+   socket.on('GetAllVideoComment', (data)=>
+   {
+      //  getUserComment(data); 
+       const {id }= data; 
+       console.log(id)
+       db.searchByValue(
+        {
+          table: 'commentaire',
+          searchAttribute: 'idVideo',
+          searchValue: id,
+          attributes: ['*']
+        },
+  
+        (err, res) => 
+        {
+          if (err){console.log(err)}
+          else{
+               
+            // console.log(res.data);
+            res.data.forEach((element,index) => 
+              {
+              // console.log(element.idYoutube)
+
+                  db.searchByValue({table: 'user',searchAttribute: 'idYoutube',searchValue: element.idYoutube,attributes: ['name','urlPic']},
+                    (err, res) => 
+                    {
+                      if (err){console.log(err)}
+                      else{
+
+                         console.log(element);
+                        const {name, urlPic}=res.data[0]; 
+                        const commentData={...element, userName:name, urlProfil:urlPic}
+                         console.log(commentData)
+                         socket.emit('sendAllVideoComment', {commentData})
+                      }
+                    }
+                  );  
+            });
+          }
+        }
+      );  
+      //  db.insert(
+      //   {table: 'commentaire', records: [{ commentaire:termComment, idVideo:idVideo, idYoutube:idClient }]
+      //   },
+      //   (err, res) => {
+      //     if (err){console.log(err)}
+      //     else{
+      //        socket.emit('sendUserComment', {termComment,idComment:res.data.inserted_hashes.toString()})
+      //     }
+      //   }
+      // );
+   })
     
-  });
 
 
-  app.get('/logout', function(req, res, next)
-  {
-    req.logout(function(err) {
-      if (err) { return next(err); }
-      res.redirect('/');
-    });
-  });
+   
 
-
-
-//  connection & gestion des evenements & emission des evenements 
-  // convert a connect middleware session to a Socket.IO middleware session
-// const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
-
-// io.use(wrap(sessionMiddleware));
-
-// io.use((socket, next) => {
-//   const session = socket.request.session;
-//   if (session && session.authenticated) {
-//     next();
-//   } else {
-//     next(new Error("unauthorized"));
-//   }
-// });
-
-
-// io.on("connection", (socket) => {
- 
-//   // Session user info on socket 
-//   console.log(` Id session N° ${socket.request.session}`);
-
-//    // socket.on('videoComment',getVideoComment);
-//    socket.on('commentUser', (data)=>
-//    {
-//        getUserComment(data); 
-//        const {termComment}= data
-//        socket.emit('sendUserComment', {termComment})
-//    })
-
-       
-//    // subcomment listener
-//    socket.on('subcommentUser', (data)=>
-//    {
-//        console.log(data)
-//        getUserSubComment(data); 
-//        const {termComment}= data
-//        socket.emit('sendUserSubComment', {termComment})
-//    })
-// });
-
+   // subcomment listener
+   socket.on('subcommentUser', (data)=>
+   {
+       console.log(data)
+       getUserSubComment(data); 
+       const {termComment}= data
+       socket.emit('sendUserSubComment', {termComment})
+   })
+});
 
 
 server.listen(5000);

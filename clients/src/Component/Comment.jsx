@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, {useState}from 'react'; 
 import {MdThumbUp, MdThumbDown} from 'react-icons/md'; 
 import InputSubcomment from './InputSubcomment'; 
 import { channelContext } from '../Service/wassoTubeContext';
@@ -11,6 +11,7 @@ dayjs.extend(relativeTIme);
 dayjs.locale('fr')
 
 function Comment({item,subcomment}) {
+    console.log(item)
     const {showInputSub, setShowInputSub}=useContext(channelContext); 
 
     const [likeCount, setLikeCount] = useState(50);
@@ -27,12 +28,12 @@ function Comment({item,subcomment}) {
                 <div className='flex  items-start justify-center w-full  '>
 
                     <div className='pr-2  '>
-                                <img src="https://images.pexels.com/photos/10026491/pexels-photo-10026491.png?auto=compress&cs=tinysrgb&w=600&lazy=load" alt=""  className=" rounded-full w-6 h-6 object-cover"/>
+                                <img src={item.urlProfil} alt=""  className=" rounded-full w-6 h-6 object-cover"/>
                     </div>
 
                             <div className='w-[80%] text-xs px-3 pt-2 pb-2  text-gray-900 bg-white shadow-md backdrop-blur-sm bg-opacity-80 backdrop-filter-blur rounded-lg h-auto' >
                                   <div className='flex text-[10px]'>
-                                    <div className=' font-bold'> Guylain wasso </div>
+                                    <div className=' font-bold first-letter:uppercase'> {item.userName} </div>
                                     <span className=' px-1'> | </span>
                                     <div> {commentDay} </div>
                                   </div>

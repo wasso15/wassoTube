@@ -2,8 +2,7 @@ import React, {useState,useRef, useContext} from 'react';
 import Logo from '../Assets/Logo.png'; 
 import sorry from '../Assets/pngwing.com.png'
 import { AiOutlineGoogle } from "react-icons/ai"
-import {SignOut} from '../Service/Auth'
-import {signInWithGoogle} from "../Service/Auth"; 
+import {signInWithGoogle,logOutFirebase} from "../Service/Auth"; 
 import { MdVideoLibrary, MdPlaylistPlay, MdMenu, MdChevronLeft, MdChevronRight,MdLogout, MdClose } from "react-icons/md";
 import {channelContext} from '../Service/wassoTubeContext'; 
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +15,7 @@ const [openDropMenu,setOpenDropMenu ] = useState(false);
 const [openLogOut, setOpenLogOut]= useState(false); 
 const [openChannelList, SetOpenChannelList]= useState(false)
 
-const {youtubeChannel,setVideoChannel,isAuthentified, setIsAuthentified} = useContext(channelContext); 
+const {youtubeChannel,setVideoChannel,isAuthentified, setIsAuthentified, } = useContext(channelContext); 
 
 // console.log(isAuthentified)
 
@@ -50,19 +49,16 @@ const datas = youtubeChannel.items;
   })
   
   
-  // // LogOut Fonction 
 
-  // const logOutFirebase =()=>{
+  const logOut =()=>{
 
-  //  SignOut()
-  
-  //  setIsAuthentified(false)
-  //  setOpenLogOut(false)
-  //  // Suppression du local storage 
-  //   localStorage.clear()
+   logOutFirebase();
+   console.log(isAuthentified); 
+   localStorage.clear()
+   setIsAuthentified(false);
 
   
-  // }
+  }
 
   // Slider card functional
 
@@ -161,7 +157,7 @@ const datas = youtubeChannel.items;
                   
                       <MdLogout className='text-xl text-[#F59E0B]'/>
                       <span className='ml-1 text-sm text-center text-[#1F2937]' 
-                      // onClick={logOutFirebase}
+                      onClick={logOut}
                       > 
                       Se deconnecter </span>
                    
@@ -210,7 +206,7 @@ const datas = youtubeChannel.items;
               
                    <MdLogout className='text-xl text-[#F59E0B]'/>
                     <span className='ml-1 text-xl text-center text-white ' 
-                    // onClick={isAuthentified ?  logOutFirebase: signInWithGoogle}
+                    onClick={isAuthentified ?  logOut : signInWithGoogle}
                     >{ isAuthentified ? 'Se deconnecter' : 'Se connecter'  }  </span>
                 </li>
           </ul>
@@ -226,7 +222,6 @@ const datas = youtubeChannel.items;
 
     openChannelList &&  
           <div className='fixed top border w-[99%] mx-auto mt-[50px] h-[230px] rounded-b-xl bg-white z-30  shadow-md backdrop-blur-sm bg-opacity-60 backdrop-filter-blur'
-          //  
           ref={menuref}
            onClick={(e)=>{e.stopPropagation()}}>
 
